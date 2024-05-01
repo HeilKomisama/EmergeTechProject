@@ -1,0 +1,10 @@
+Make sure there's a library called jpalibs and add these folders/jars to it for persistence to work:
+
+/eclipselink.jar
+/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar
+/jpa/javax.persistence.source_2.1.0.v201304241213.jar
+/jpa/javax.persistence_2.1.0.v201304241213.jar
+/jpa/org.eclipse.persistence.jpa.modelgen.source_2.5.2.v20140319-9ad6abd.jar
+/jpa/org.eclipse.persistence.jpa.modelgen_2.5.2.v20140319-9ad6abd.jar
+/jpa/org.eclipse.persistence.jpars.source_2.5.2.v20140319-9ad6abd.jar
+/jpa/org.eclipse.persistence.jpars_2.5.2.v20140319-9ad6abd.jar
