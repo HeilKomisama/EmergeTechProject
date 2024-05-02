@@ -57,10 +57,8 @@ private AdminController adminController;
         passwordLabel.setText("Password");
 
         tfEmail.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tfEmail.setText("\n");
 
         tfPassword.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        tfPassword.setText("\n");
 
         forgotPassBtn.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         forgotPassBtn.setText("Forgot Password?");
@@ -149,8 +147,6 @@ private AdminController adminController;
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // TODO add your handling code here:
-        
         if(tfEmail.getText().trim().isEmpty() || tfPassword.getText().trim().isEmpty()) {
                     //error message
                     JOptionPane.showMessageDialog(rootPane, "Please fill up the empty fields.", "Missing Information", JOptionPane.ERROR_MESSAGE);
@@ -165,6 +161,7 @@ private AdminController adminController;
                     Boolean accepted = false;
                     
                     //check if email already exists in database
+            
                     Admin foundAdmin = adminController.checkAdmin(email);
                     Admin foundPass = adminController.checkPass(password);
                     
