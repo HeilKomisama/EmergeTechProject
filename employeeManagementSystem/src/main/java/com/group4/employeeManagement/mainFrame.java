@@ -28,15 +28,22 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
 public class mainFrame extends JFrame {
+    //component instances
     private JPanel contentPane;
+    private JPanel pInput;
+    private JButton btnCreate;
+    private JButton btnUpdate;
+    private JButton btnEdit;
+    private JButton btnDelete;
     private JTextField tfFName;
     private JTextField tfLName;
-    private JTextField tfID;
     private JTextField tfEmail;
+    private JTextField tfID;
+    private JTextField tfDept;
     private JTextField tfContact;
     private JTable table;
 
-    //MAIN FUNCTION
+    //main function
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -50,98 +57,124 @@ public class mainFrame extends JFrame {
         });
     }
 
-    //MAINFRAME FUNCTION
+    //main frame function
     public mainFrame() {
         setTitle("Database");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(100, 100, 862, 568);
+        setBounds(100, 100, 900, 568);
 
-
+        //main panel
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(this.contentPane);
+        setContentPane(contentPane);
         contentPane.setLayout((LayoutManager)null);
 
-        JPanel pInput = new JPanel();
+        //input panel
+        pInput = new JPanel();
         pInput.setBorder(new LineBorder(new Color(0, 0, 0)));
-        pInput.setBounds(0, 0, 848, 108);
+        pInput.setBounds(0, 0, 885, 108);
         contentPane.add(pInput);
         pInput.setLayout((LayoutManager)null);
 
-        JButton btnAdd = new JButton("Add Member");
-        btnAdd.setBounds(712, 28, 115, 21);
-        pInput.add(btnAdd);
+        //create button
+        btnCreate = new JButton("Create Member");
+        btnCreate.setBounds(740, 28, 125, 21);
+        pInput.add(btnCreate);
 
-        JButton btnSave = new JButton("Save Member");
-        btnSave.setBounds(712, 59, 115, 21);
-        pInput.add(btnSave);
+        //update button
+        btnUpdate = new JButton("Update Member");
+        btnUpdate.setBounds(740, 59, 125, 21);
+        pInput.add(btnUpdate);
 
+        //member info panel
         JPanel panel = new JPanel();
-        panel.setBounds(20, 11, 672, 84);
+        panel.setBounds(20, 11, 705, 84);
         pInput.add(panel);
         panel.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(1, new Color(255, 255, 255), new Color(160, 160, 160)), "Member Information", 4, 2, (Font)null, new Color(0, 0, 0)), "", 4, 2, (Font)null, (Color)null));
         panel.setLayout((LayoutManager)null);
-        JLabel lblNewLabel_2 = new JLabel("Member ID");
+
+        //label and textfield for first name
+        JLabel lblNewLabel_2 = new JLabel("First Name");
         lblNewLabel_2.setBounds(10, 26, 66, 13);
         panel.add(lblNewLabel_2);
-        JLabel lblNewLabel_3 = new JLabel("Email Address");
-        lblNewLabel_3.setBounds(10, 56, 89, 13);
-        panel.add(lblNewLabel_3);
-        tfID = new JTextField();
-        tfID.setBounds(86, 23, 115, 19);
-        panel.add(this.tfID);
-        tfID.setColumns(10);
-        tfEmail = new JTextField();
-        tfEmail.setBounds(104, 53, 145, 19);
-        panel.add(tfEmail);
-        tfEmail.setColumns(10);
-        JLabel lblNewLabel = new JLabel("First Name");
-        lblNewLabel.setBounds(219, 26, 66, 13);
-        panel.add(lblNewLabel);
-        JLabel lblNewLabel_4 = new JLabel("Contact");
-        lblNewLabel_4.setBounds(274, 56, 45, 13);
-        panel.add(lblNewLabel_4);
-        tfContact = new JTextField();
-        tfContact.setBounds(329, 53, 136, 19);
-        panel.add(tfContact);
-        tfContact.setColumns(10);
         tfFName = new JTextField();
-        tfFName.setBounds(295, 23, 136, 19);
+        tfFName.setBounds(80, 23, 115, 19);
         panel.add(tfFName);
         tfFName.setColumns(10);
-        JLabel lblNewLabel_1 = new JLabel("Last Name");
-        lblNewLabel_1.setBounds(452, 26, 66, 13);
-        panel.add(lblNewLabel_1);
+
+        //label and textfield for last name
+        JLabel lblNewLabel = new JLabel("Last Name");
+        lblNewLabel.setBounds(210, 26, 66, 13);
+        panel.add(lblNewLabel);
         tfLName = new JTextField();
-        tfLName.setBounds(518, 23, 136, 19);
+        tfLName.setBounds(280, 23, 136, 19);
         panel.add(tfLName);
         tfLName.setColumns(10);
 
+        //label and textfield for email address
+        JLabel lblNewLabel_1 = new JLabel("Email");
+        lblNewLabel_1.setBounds(430, 26, 66, 13);
+        panel.add(lblNewLabel_1);
+        tfEmail = new JTextField();
+        tfEmail.setBounds(475, 23, 136, 19);
+        panel.add(tfEmail);
+        tfEmail.setColumns(10);
+
+        //label and textfield for employee id
+        JLabel lblNewLabel_3 = new JLabel("Employee ID");
+        lblNewLabel_3.setBounds(10, 56, 89, 13);
+        panel.add(lblNewLabel_3);
+        tfID = new JTextField();
+        tfID.setBounds(90, 53, 145, 19);
+        panel.add(tfID);
+        tfID.setColumns(10);
+
+        //label and textfield for department
+        JLabel lblNewLabel_4 = new JLabel("Department");
+        lblNewLabel_4.setBounds(250, 56, 70, 13);
+        panel.add(lblNewLabel_4);
+        tfDept = new JTextField();
+        tfDept.setBounds(330, 53, 136, 19);
+        panel.add(tfDept);
+        tfDept.setColumns(10);
+
+        //label and textfield for contact num
+        JLabel lblNewLabel_5 = new JLabel("Contact No.");
+        lblNewLabel_5.setBounds(480, 56, 120, 13);
+        panel.add(lblNewLabel_5);
+        tfContact = new JTextField();
+        tfContact.setBounds(560, 53, 136, 19);
+        panel.add(tfContact);
+        tfContact.setColumns(10);
+
+        //table panel
         JPanel pTable = new JPanel();
-        pTable.setBackground(Color.PINK);
         pTable.setBorder((Border)null);
-        pTable.setBounds(10, 118, 828, 403);
+        pTable.setBounds(10, 118, 860, 403);
         contentPane.add(pTable);
         pTable.setLayout((LayoutManager)null);
-        JButton btnDelete = new JButton("Delete");
 
-        btnDelete.setBounds(730, 372, 88, 21);
+        //edit button
+        btnEdit = new JButton("Edit Member");
+        btnEdit.setBounds(575, 372, 125, 21);
+        pTable.add(btnEdit);
+
+        //delete button
+        btnDelete = new JButton("Delete member");
+        btnDelete.setBounds(720, 372, 125, 21);
         pTable.add(btnDelete);
 
-        JButton btnEdit = new JButton("Edit");
-        btnEdit.setBounds(632, 372, 88, 21);
-
-        pTable.add(btnEdit);
-        String[] columnNames = new String[]{"ID", "First Name", "Last Name", "Email", "Contact"};
+        //table of records
+        String[] columnNames = new String[]{"ID", "First Name", "Last Name", "Email", "Contact No.", "Department"};
         table = new JTable(new DefaultTableModel(columnNames, 0));
         table.setDefaultEditor(Object.class, (TableCellEditor)null);
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 10, 808, 350);
+        scrollPane.setBounds(10, 10, 848, 350);
         scrollPane.setViewportView(table);
         table.setBorder(new LineBorder(new Color(0, 0, 0)));
         pTable.add(scrollPane);
-        
-        btnAdd.addActionListener(new ActionListener() {
+
+        btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty()) {
 					//error message
@@ -153,14 +186,15 @@ public class mainFrame extends JFrame {
 			        String lastName = tfLName.getText();
 			        String email = tfEmail.getText();
 			        String contact = tfContact.getText();
+                    String department = tfDept.getText();
 			        
-			        EntityManagerFactory emf = Persistence.createEntityManagerFactory("memberdata"); //specifying database name
+			        EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
 					EntityManager em = emf.createEntityManager(); //manager to perform database operations
 					EntityTransaction et = em.getTransaction();
 					
 					et.begin(); //begins the transaction
 					
-			        MemberEntity newMember = new MemberEntity(id, firstName, lastName, email, contact);
+			        EmployeeEntity newMember = new EmployeeEntity(id, firstName, lastName, email, contact, department);
 
 					em.persist(newMember);
 					et.commit(); //commit the transaction
@@ -168,7 +202,7 @@ public class mainFrame extends JFrame {
 					emf.close(); //close the manager
 			        
 					//add created member to table
-			        Object[] row = {id, firstName, lastName, email, contact};
+			        Object[] row = {id, firstName, lastName, email, contact, department};
 			        DefaultTableModel model = (DefaultTableModel) table.getModel();
 			        model.addRow(row);
 			        
@@ -178,13 +212,14 @@ public class mainFrame extends JFrame {
 			        tfFName.setText("");
 			        tfEmail.setText("");
 			        tfContact.setText("");
+                    tfDept.setText("");
 				}	
 			}
 		});
-                btnSave.addActionListener((ActionEvent e) -> {
+                btnUpdate.addActionListener((ActionEvent e) -> {
                     int selectedRow = table.getSelectedRow();
                     if (selectedRow != -1) { // Check if a row is selected
-                        if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty()) {
+                        if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty() || tfDept.getText().trim().isEmpty()) {
                             //error message
                             JOptionPane.showMessageDialog(rootPane, "Please fill up the empty fields.", "Missing Information", JOptionPane.ERROR_MESSAGE);
                         }
@@ -194,6 +229,7 @@ public class mainFrame extends JFrame {
                             String lastName = tfLName.getText();
                             String email = tfEmail.getText();
                             String contact = tfContact.getText();
+                            String department = tfDept.getText();
                             
                             DefaultTableModel model = (DefaultTableModel) table.getModel();
                             model.setValueAt(id, selectedRow, 0);
@@ -201,17 +237,19 @@ public class mainFrame extends JFrame {
                             model.setValueAt(lastName, selectedRow, 2);
                             model.setValueAt(email, selectedRow, 3);
                             model.setValueAt(contact, selectedRow, 4);
+                            model.setValueAt(department, selectedRow, 5);
                             
-                            EntityManagerFactory emf = Persistence.createEntityManagerFactory("memberdata"); //specifying database name
+                            EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
                             EntityManager em = emf.createEntityManager(); //manager to perform database operations
                             EntityTransaction et = em.getTransaction();
                             et.begin(); //begins the transaction
                             
-                            MemberEntity editedMember = em.find(MemberEntity.class, id);
+                            EmployeeEntity editedMember = em.find(EmployeeEntity.class, id);
                             editedMember.setfName(firstName);
                             editedMember.setlName(lastName);
                             editedMember.setEmail(email);
                             editedMember.setContact(contact);
+                            editedMember.setDepartment(department);
                             
                             et.commit(); //commit the transaction
                             em.close(); //close the manager
@@ -232,12 +270,14 @@ public class mainFrame extends JFrame {
 		            String lastName = table.getValueAt(selectedRow, 2).toString();
 		            String email = table.getValueAt(selectedRow, 3).toString();
 		            String contact = table.getValueAt(selectedRow, 4).toString();
+                    String department = table.getValueAt(selectedRow, 5).toString();
 
 		            tfID.setText(Integer.toString(id));
 		            tfFName.setText(firstName);
 		            tfLName.setText(lastName);
 		            tfEmail.setText(email);
 		            tfContact.setText(contact);
+                    tfDept.setText(department);
 		        }
 		        else {
 		        	//error message
@@ -251,12 +291,12 @@ public class mainFrame extends JFrame {
 		        if (selectedRow != -1) { // Check if a row is selected
 		            int idToDelete = (int) table.getValueAt(selectedRow, 0);
 
-		            EntityManagerFactory emf = Persistence.createEntityManagerFactory("memberdata"); //specifying database name
+		            EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
 					EntityManager em = emf.createEntityManager(); //manager to perform database operations
 					EntityTransaction et = em.getTransaction();
 					et.begin(); //begins the transaction
 
-		            MemberEntity memberToDelete = em.find(MemberEntity.class, idToDelete); //get id as reference
+		            EmployeeEntity memberToDelete = em.find(EmployeeEntity.class, idToDelete); //get id as reference
 		            em.remove(memberToDelete); //remove record from the database
 		            et.commit(); //commit the transaction
 					em.close(); //close the manager
@@ -271,10 +311,13 @@ public class mainFrame extends JFrame {
 		        }
 			}
 		});
-        
-        
    }
-    
-    
 
 }
+        
+        
+        
+        
+
+    
+    

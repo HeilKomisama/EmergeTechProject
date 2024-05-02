@@ -3,24 +3,25 @@ package com.group4.employeeManagement;
 import javax.persistence.*;
 
 @Entity
-@Table(name="member")
+@Table(name="employee")
 
-public class MemberEntity {
+public class EmployeeEntity {
 	@Id
         //member variables
 	private int id;
-	private String firstName, lastName, email, contact;
+	private String firstName, lastName, email, department, contact;
 	
         //constructor
-	public MemberEntity(int id, String firstName, String lastName, String email, String contact) {
+	public EmployeeEntity(int id, String firstName, String lastName, String email, String contact, String department) {
 		super();
 		this.id=id;
-                this.lastName=lastName;
+        this.lastName=lastName;
 		this.firstName=firstName;
-                this.contact=contact;
+        this.contact=contact;
+		this.department=department;
 		this.email=email;
 	}
-	public MemberEntity() {
+	public EmployeeEntity() {
 		super();
 	}
 	
@@ -35,6 +36,14 @@ public class MemberEntity {
         
         public String getContact() {
 		return contact;
+	}
+	
+	public void setDepartment(String department) {
+		this.department=department;
+	}
+
+	public String getDepartment() {
+		return department;
 	}
 	
 	public void setContact(String contact) {
