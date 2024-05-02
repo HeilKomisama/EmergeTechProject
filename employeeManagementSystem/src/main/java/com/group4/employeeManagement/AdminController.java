@@ -16,7 +16,7 @@ public class AdminController {
 	public Admin findAdminByEmail(String email) {
 		EntityManager em = emf.createEntityManager();
 		try {
-			return em.createQuery("SELECT u FROM Admin u where u.email = :email", Admin.class)
+			return em.createQuery("SELECT a FROM Admin a WHERE a.email = :email", Admin.class)
 			.setParameter("email", email).
                         getSingleResult();
 		} catch (Exception e) {
@@ -31,7 +31,7 @@ public class AdminController {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //manager factory to access the database
         EntityManager em = emf.createEntityManager(); //manager to perform database operations
         try {
-            return em.createQuery("SELECT u FROM Admin u WHERE u.email = :email", Admin.class)
+            return em.createQuery("SELECT a FROM Admin a WHERE a.email = :email", Admin.class)
                     .setParameter("email", email)
                     .getSingleResult();
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class AdminController {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //manager factory to access the database
         EntityManager em = emf.createEntityManager(); //manager to perform database operations
         try {
-            return em.createQuery("SELECT u FROM Admin u WHERE u.password = :password", Admin.class)
+            return em.createQuery("SELECT a FROM Admin a WHERE a.password = :password", Admin.class)
                     .setParameter("password", password)
                     .getSingleResult();
         } catch (Exception e) {
