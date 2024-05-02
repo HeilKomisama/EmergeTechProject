@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 
-// Class acts as Controller for Users
+// Class acts as Controller for Admins
 public class AdminController {
 	private final EntityManagerFactory emf;
 	
@@ -13,11 +13,12 @@ public class AdminController {
 		emf = Persistence.createEntityManagerFactory("employeeschema");
 	}
 	
-	public Admin findUserByUsername(String username) {
+	public Admin findAdminByEmail(String email) {
 		EntityManager em = emf.createEntityManager();
 		try {
-			return em.createQuery("SELECT u FROM User u where u.username = :username", Admin.class)
-					.setParameter("username", username).getSingleResult();
+			return em.createQuery("SELECT u FROM Admin u where u.email = :email", Admin.class)
+			.setParameter("email", email).
+                        getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -26,12 +27,12 @@ public class AdminController {
 		}
 	}
 	
-	public Admin checkUser(String username) {
+	public Admin checkAdmin(String email) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //manager factory to access the database
         EntityManager em = emf.createEntityManager(); //manager to perform database operations
         try {
-            return em.createQuery("SELECT u FROM Admin u WHERE u.username = :username", Admin.class)
-                    .setParameter("username", username)
+            return em.createQuery("SELECT u FROM Admin u WHERE u.email = :email", Admin.class)
+                    .setParameter("email", email)
                     .getSingleResult();
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,14 +9,14 @@ public class Admin {
 	@Id
         //member variables
 	private int id;
-	private String user,password;
+	private String email,password;
 	
         //constructor
-	public Admin(int id, String user, String password) {
-		super();
-		this.id=id;
-        this.user=user;
-        this.password=password;
+	public Admin(int id,String email, String password) {
+            super();
+            this.id=id;
+            this.email=email;
+            this.password=password;
 	}
 	public Admin() {
 		super();
@@ -26,28 +26,19 @@ public class Admin {
 	public int getId() {
 		return id;
 	}
-	
 	public void setId(int id) {
 		this.id=id;
 	}
-        
-        public String getUser() {
-		return user;
+        public String getEmail() {
+		return email;
 	}
-	
-    public String getPassword(String user) {
-		if(this.user==user){
+    public String getPassword(String email) {
+		if(this.email==email){
             return password;
         }
         return "";
         
 	}
-
-
-    public void setUser(String user) {
-		this.user=user;
-	}
-
     public void setPassword(String password) {
 		this.password=password;
 	}
