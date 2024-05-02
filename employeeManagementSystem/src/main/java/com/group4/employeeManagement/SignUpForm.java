@@ -4,13 +4,11 @@
  */
 package com.group4.employeeManagement;
 
-import com.group4.employeeManagement.Admin;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -137,11 +135,8 @@ public class SignUpForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        // TODO add your handling code here:
-       
-            	
-            	
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed 
+            	            	
                 //check if any fields are missing
                 if(tfEmail.getText().trim().isEmpty() || tfPassword.getText().trim().isEmpty()) {
                     //error message
