@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.persistence.EntityManager;
@@ -174,6 +175,8 @@ public class mainFrame extends JFrame {
         table.setBorder(new LineBorder(new Color(0, 0, 0)));
         pTable.add(scrollPane);
 
+        loadMembersFromDatabase("SELECT m FROM EmployeeEntity m");
+
         btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty()) {
@@ -216,52 +219,54 @@ public class mainFrame extends JFrame {
 				}	
 			}
 		});
-                btnUpdate.addActionListener((ActionEvent e) -> {
-                    int selectedRow = table.getSelectedRow();
-                    if (selectedRow != -1) { // Check if a row is selected
-                        if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty() || tfDept.getText().trim().isEmpty()) {
-                            //error message
-                            JOptionPane.showMessageDialog(rootPane, "Please fill up the empty fields.", "Missing Information", JOptionPane.ERROR_MESSAGE);
-                        }
-                        else {
-                            int id = Integer.parseInt(tfID.getText());
-                            String firstName = tfFName.getText();
-                            String lastName = tfLName.getText();
-                            String email = tfEmail.getText();
-                            String contact = tfContact.getText();
-                            String department = tfDept.getText();
-                            
-                            DefaultTableModel model = (DefaultTableModel) table.getModel();
-                            model.setValueAt(id, selectedRow, 0);
-                            model.setValueAt(firstName, selectedRow, 1);
-                            model.setValueAt(lastName, selectedRow, 2);
-                            model.setValueAt(email, selectedRow, 3);
-                            model.setValueAt(contact, selectedRow, 4);
-                            model.setValueAt(department, selectedRow, 5);
-                            
-                            EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
-                            EntityManager em = emf.createEntityManager(); //manager to perform database operations
-                            EntityTransaction et = em.getTransaction();
-                            et.begin(); //begins the transaction
-                            
-                            EmployeeEntity editedMember = em.find(EmployeeEntity.class, id);
-                            editedMember.setfName(firstName);
-                            editedMember.setlName(lastName);
-                            editedMember.setEmail(email);
-                            editedMember.setContact(contact);
-                            editedMember.setDepartment(department);
-                            
-                            et.commit(); //commit the transaction
-                            em.close(); //close the manager
-                            emf.close(); //close the manager
-                        }
-                    }
-                    else {
-                        //error message
-                        JOptionPane.showMessageDialog(rootPane, "Please select a row and click on the edit button to save an edited record", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
+
+        btnUpdate.addActionListener((ActionEvent e) -> {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) { // Check if a row is selected
+                if(tfID.getText().trim().isEmpty() || tfFName.getText().trim().isEmpty() || tfLName.getText().trim().isEmpty() || tfEmail.getText().trim().isEmpty() || tfContact.getText().trim().isEmpty() || tfDept.getText().trim().isEmpty()) {
+                    //error message
+                    JOptionPane.showMessageDialog(rootPane, "Please fill up the empty fields.", "Missing Information", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    int id = Integer.parseInt(tfID.getText());
+                    String firstName = tfFName.getText();
+                    String lastName = tfLName.getText();
+                    String email = tfEmail.getText();
+                    String contact = tfContact.getText();
+                    String department = tfDept.getText();
+                    
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    model.setValueAt(id, selectedRow, 0);
+                    model.setValueAt(firstName, selectedRow, 1);
+                    model.setValueAt(lastName, selectedRow, 2);
+                    model.setValueAt(email, selectedRow, 3);
+                    model.setValueAt(contact, selectedRow, 4);
+                    model.setValueAt(department, selectedRow, 5);
+                    
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
+                    EntityManager em = emf.createEntityManager(); //manager to perform database operations
+                    EntityTransaction et = em.getTransaction();
+                    et.begin(); //begins the transaction
+                    
+                    EmployeeEntity editedMember = em.find(EmployeeEntity.class, id);
+                    editedMember.setfName(firstName);
+                    editedMember.setlName(lastName);
+                    editedMember.setEmail(email);
+                    editedMember.setContact(contact);
+                    editedMember.setDepartment(department);
+                    
+                    et.commit(); //commit the transaction
+                    em.close(); //close the manager
+                    emf.close(); //close the manager
+                }
+            }
+            else {
+                //error message
+                JOptionPane.showMessageDialog(rootPane, "Please select a row and click on the edit button to save an edited record", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
-                btnEdit.addActionListener(new ActionListener() {
+        
+        btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 		        if (selectedRow != -1) { // Check if a row is selected
@@ -285,25 +290,26 @@ public class mainFrame extends JFrame {
 		        }
 			}
 		});
-                btnDelete.addActionListener(new ActionListener() {
+
+        btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedRow = table.getSelectedRow();
 		        if (selectedRow != -1) { // Check if a row is selected
-		            int idToDelete = (int) table.getValueAt(selectedRow, 0);
+                    int idToDelete = (int) table.getValueAt(selectedRow, 0);
 
-		            EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
-					EntityManager em = emf.createEntityManager(); //manager to perform database operations
-					EntityTransaction et = em.getTransaction();
-					et.begin(); //begins the transaction
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema"); //specifying database name
+                    EntityManager em = emf.createEntityManager(); //manager to perform database operations
+                    EntityTransaction et = em.getTransaction();
+                    et.begin(); //begins the transaction
 
-		            EmployeeEntity memberToDelete = em.find(EmployeeEntity.class, idToDelete); //get id as reference
-		            em.remove(memberToDelete); //remove record from the database
-		            et.commit(); //commit the transaction
-					em.close(); //close the manager
-					emf.close(); //close the manager
+                    EmployeeEntity memberToDelete = em.find(EmployeeEntity.class, idToDelete); //get id as reference
+                    em.remove(memberToDelete); //remove record from the database
+                    et.commit(); //commit the transaction
+                    em.close(); //close the manager
+                    emf.close(); //close the manager
 
-		            DefaultTableModel model = (DefaultTableModel) table.getModel();
-		            model.removeRow(selectedRow); // Remove the row from the table model
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    model.removeRow(selectedRow); // Remove the row from the table model
 		        }
 		        else {
 		        	//error message
@@ -312,6 +318,22 @@ public class mainFrame extends JFrame {
 			}
 		});
    }
+
+    private void loadMembersFromDatabase(String string) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema");
+        EntityManager em = emf.createEntityManager();
+
+        List<EmployeeEntity> members = em.createQuery(string, EmployeeEntity.class).getResultList();
+
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        for (EmployeeEntity member : members) {
+            Object[] rowData = {member.getId(), member.getfName(), member.getlName(), member.getEmail(), member.getContact(), member.getContact()};
+            model.addRow(rowData);
+        }
+
+        em.close();
+        emf.close();
+    }
 
 }
         
