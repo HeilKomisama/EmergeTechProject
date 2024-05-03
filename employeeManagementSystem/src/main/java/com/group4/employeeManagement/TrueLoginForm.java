@@ -62,6 +62,11 @@ private AdminController adminController;
 
         forgotPassBtn.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         forgotPassBtn.setText("Forgot Password?");
+        forgotPassBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgotPassBtnMouseClicked(evt);
+            }
+        });
 
         loginBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         loginBtn.setText("Login");
@@ -199,9 +204,14 @@ private AdminController adminController;
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void dhaBtnMouseClicked(java.awt.event.MouseEvent evt) {                                    
-        // TODO add your handling code here:
         SignUpForm sf = new SignUpForm();
         sf.setVisible(true);
+        dispose();
+    }    
+
+    private void forgotPassBtnMouseClicked(java.awt.event.MouseEvent evt) {                                    
+        ForgotPassword fp = new ForgotPassword();
+        fp.setVisible(true);
         dispose();
     }    
 
