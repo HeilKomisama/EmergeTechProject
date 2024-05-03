@@ -203,7 +203,6 @@ public class SignUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void haBtnMouseClicked(java.awt.event.MouseEvent evt) {                                    
-        // TODO add your handling code here:
         TrueLoginForm lf = new TrueLoginForm(adminController);
         lf.setVisible(true);
         dispose();
