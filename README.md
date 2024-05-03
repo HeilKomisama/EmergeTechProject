@@ -1,6 +1,5 @@
 **Stuff left to do: **
 
--Fix Main UI
 -Finish Forgot Password functionalities
 -Attach page redirect buttons
 -Bugfixing
@@ -9,3 +8,8 @@
 
 More to be added if needed!!!
 The due is so close!!!
+
+NOTE:
+- CLEAR INITIAL LIBRARY IMPORTS THEN MANUALLY IMPORT FOR CODE TO WORK
+- CHANGE MYSQL PASSWORD ON PERSISTENCE.XML
+- enjoy :)
