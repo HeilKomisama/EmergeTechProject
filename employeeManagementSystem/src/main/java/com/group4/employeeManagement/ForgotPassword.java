@@ -4,17 +4,26 @@
  */
 package com.group4.employeeManagement;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author bowse
  */
 public class ForgotPassword extends javax.swing.JFrame {
-
+    private AdminController adminController;
     /**
      * Creates new form ForgotPassword
      */
-    public ForgotPassword() {
+    public ForgotPassword(AdminController adminController) {
         initComponents();
+        this.adminController = adminController;
     }
 
     /**
@@ -39,6 +48,11 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         forgotPassLabel.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         forgotPassLabel.setText("Forgot Password");
+        sendBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendBtnActionPerformed(evt);
+            }
+        });
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         emailLabel.setText("Email");
@@ -121,7 +135,22 @@ public class ForgotPassword extends javax.swing.JFrame {
         TrueLoginForm lf = new TrueLoginForm(new AdminController());
         lf.setVisible(true);
         dispose();
-    }    
+    }
+
+    private void sendBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        String email = tfEmail.getText();
+        System.out.println("email: "+email);
+        String pass = adminController.retrievePassword(email);
+        System.out.println("pass: "+pass);
+        if (pass!=null){
+            JOptionPane.showMessageDialog(rootPane, "Your password is "+pass, "Password Retrieved", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Email does not exist!", "No Email", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }            
+    
     /**
      * @param args the command line arguments
      */
@@ -152,11 +181,10 @@ public class ForgotPassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ForgotPassword().setVisible(true);
+                new ForgotPassword(new AdminController()).setVisible(true);
             }
         });
 
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

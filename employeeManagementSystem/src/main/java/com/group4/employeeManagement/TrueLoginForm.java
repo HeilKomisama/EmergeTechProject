@@ -210,7 +210,7 @@ private AdminController adminController;
     }    
 
     private void forgotPassBtnMouseClicked(java.awt.event.MouseEvent evt) {                                    
-        ForgotPassword fp = new ForgotPassword();
+        ForgotPassword fp = new ForgotPassword(adminController);
         fp.setVisible(true);
         dispose();
     }    
