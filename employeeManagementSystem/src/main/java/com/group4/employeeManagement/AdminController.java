@@ -1,8 +1,11 @@
 package com.group4.employeeManagement;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.table.DefaultTableModel;
 
 
 // Class acts as Controller for Admins
@@ -55,6 +58,23 @@ public class AdminController {
         } finally {
             em.close();
         }
+    }
+
+    public String retrievePassword(String email) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("employeeschema");
+        EntityManager em = emf.createEntityManager();
+
+        List<Admin> admins = em.createQuery("SELECT a FROM Admin a", Admin.class).getResultList();
+
+        // DefaultTableModel model = (DefaultTableModel) table.getModel();
+         for (Admin admin : admins) {
+        if (admin.getEmail().equals(email)){
+            return admin.getPassword();
+        }
+        }
+        em.close();
+        emf.close();
+        return null;
     }
     
     @SuppressWarnings("null")

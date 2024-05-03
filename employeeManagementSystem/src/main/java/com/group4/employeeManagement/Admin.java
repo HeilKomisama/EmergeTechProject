@@ -32,13 +32,7 @@ public class Admin {
         public String getEmail() {
 		return email;
 	}
-    public String getPassword(String email) {
-		if(this.email==email){
-            return password;
-        }
-        return "";
-        
-	}
+    
     public void setPassword(String password) {
 		this.password=password;
 	}
